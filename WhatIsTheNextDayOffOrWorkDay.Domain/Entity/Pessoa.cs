@@ -1,10 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WhatIsTheNextDayOffOrWorkDay.Domain.Entity
 {
-    class Pessoa
+    public class Pessoa
     {
+        public int Id { get; set; }
+        public string NomeCompleto { get; set; }
+        public string Apelido { get; set; }
+        public string NumeroCPF { get; set; }
+        public string DataNascimento { get; set; }
     }
 }
