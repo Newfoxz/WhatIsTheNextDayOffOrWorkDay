@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +13,6 @@ namespace WhatIsTheNextDayOffOrWorkDay.Web
     {
         public Startup(IConfiguration configuration)
         {
-            // Configuration = configuration;
             Configuration = new ConfigurationBuilder().AddJsonFile("config.json", optional: false, reloadOnChange: true).Build();
         }
 
@@ -23,7 +21,7 @@ namespace WhatIsTheNextDayOffOrWorkDay.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<WhatIsTheNextDayOffOrWorkDayDbContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"))
+                options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"))
             );
             services.AddControllersWithViews();           
             services.AddSpaStaticFiles(configuration =>

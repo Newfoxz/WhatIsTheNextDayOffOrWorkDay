@@ -12,10 +12,8 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Configuration
         public void Configure(EntityTypeBuilder<Pessoa> builder)
         {
             builder.HasKey(pessoa => pessoa.Id);
-            builder.Property(pessoa => pessoa.NomeCompleto).IsRequired().HasMaxLength(75);
             builder.Property(pessoa => pessoa.Apelido).IsRequired().HasMaxLength(25);
-            builder.Property(pessoa => pessoa.NumeroCPF).IsRequired().HasMaxLength(11);
-            builder.Property(pessoa => pessoa.DataNascimento).IsRequired();
+            builder.HasOne(pessoa => pessoa.Escala);
         }
     }
 }
