@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WhatIsTheNextDayOffOrWorkDay.Repository.Migrations
 {
-    public partial class _10version_db : Migration
+    public partial class db_10_WhatIsTheNextDayOffOrWorkDay : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

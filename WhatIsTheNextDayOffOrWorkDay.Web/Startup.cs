@@ -20,10 +20,12 @@ namespace WhatIsTheNextDayOffOrWorkDay.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
             services.AddDbContext<WhatIsTheNextDayOffOrWorkDayDbContext>(options => 
-                options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"))
-            );
-            services.AddControllersWithViews();           
+                options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("WhatIsTheNextDayOffOrWorkDay"), migration => 
+                    migration.MigrationsAssembly("WhatIsTheNextDayOffOrWorkDay.Repository")
+                )
+            );                
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";

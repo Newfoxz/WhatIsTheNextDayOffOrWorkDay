@@ -10,8 +10,8 @@ using WhatIsTheNextDayOffOrWorkDay.Repository.Context;
 namespace WhatIsTheNextDayOffOrWorkDay.Repository.Migrations
 {
     [DbContext(typeof(WhatIsTheNextDayOffOrWorkDayDbContext))]
-    [Migration("20201111210113_1.0-version_db")]
-    partial class _10version_db
+    [Migration("20201111212314_db_10_WhatIsTheNextDayOffOrWorkDay")]
+    partial class db_10_WhatIsTheNextDayOffOrWorkDay
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
