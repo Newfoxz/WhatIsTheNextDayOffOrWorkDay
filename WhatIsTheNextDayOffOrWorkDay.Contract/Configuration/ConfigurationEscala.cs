@@ -11,7 +11,10 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Configuration
     {
         public void Configure(EntityTypeBuilder<Escala> builder)
         {
-            
+            builder.HasKey(escala => escala.Id);
+            builder.Property(escala => escala.Descricao).IsRequired().HasMaxLength(25);
+            builder.Property(escala => escala.VigenciaInicial).IsRequired();
+            builder.Property(escala => escala.VigenciaFinal);
         }
     }
 }

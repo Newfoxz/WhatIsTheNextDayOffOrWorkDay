@@ -7,21 +7,15 @@ namespace WhatIsTheNextDayOffOrWorkDay.Domain.Entity
         public int Id { get; set; }
         public int Numero { get; set; }
         public int Indicador { get; set; }
-        public string IndicadorToString
+
+        public string GetIndicadorToString()
         {
-            get
-            {
-                if (Indicador == 0)
-                    return "DayOff";
-                else if (Indicador == 1)
-                    return "WorkDay";
-                else
-                    return null;
-            }
-            private set 
-            { 
-            
-            }
+            if (Indicador == 0)
+                return "DayOff";
+            else if (Indicador == 1)
+                return "WorkDay";
+            else
+                return null;
         }
     }
 }
