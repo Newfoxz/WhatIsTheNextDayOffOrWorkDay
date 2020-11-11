@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "SqlServerConnection": "server=localhost;database=WhatIsTheNextDayOffOrWorkDay;trusted_connection=true;multipleactiveresultsets=true",
+    "MySqlConnection": "server=localhost;uid=root;pwd=admin;datababase=WhatIsTheNextDayOffOrWorkDay"
+  }
+}
