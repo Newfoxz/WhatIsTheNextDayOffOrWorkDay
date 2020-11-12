@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhatIsTheNextDayOffOrWorkDay.Repository.Context;
 
 namespace WhatIsTheNextDayOffOrWorkDay.Repository.Migrations
 {
     [DbContext(typeof(WhatIsTheNextDayOffOrWorkDayDbContext))]
-    partial class WhatIsTheNextDayOffOrWorkDayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201111235439_db_11_WhatIsTheNextDayOffOrWorkDay")]
+    partial class db_11_WhatIsTheNextDayOffOrWorkDay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,11 +53,6 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(75)
-                        .HasColumnType("nvarchar(75)");
-
                     b.Property<int>("EscalaId")
                         .HasColumnType("int");
 
@@ -92,7 +89,7 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Migrations
             modelBuilder.Entity("WhatIsTheNextDayOffOrWorkDay.Domain.Entity.Pessoa", b =>
                 {
                     b.HasOne("WhatIsTheNextDayOffOrWorkDay.Domain.Entity.Escala", "Escala")
-                        .WithMany()
+                        .WithMany("Pessoas")
                         .HasForeignKey("EscalaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -113,6 +110,8 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Migrations
 
             modelBuilder.Entity("WhatIsTheNextDayOffOrWorkDay.Domain.Entity.Escala", b =>
                 {
+                    b.Navigation("Pessoas");
+
                     b.Navigation("Sequencias");
                 });
 #pragma warning restore 612, 618

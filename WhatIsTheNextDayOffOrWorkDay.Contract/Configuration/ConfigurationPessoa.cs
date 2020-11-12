@@ -13,6 +13,7 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Configuration
         {
             builder.HasKey(pessoa => pessoa.Id);
             builder.Property(pessoa => pessoa.Apelido).IsRequired().HasMaxLength(25);
+            builder.Property(pessoa => pessoa.Email).IsRequired().HasMaxLength(75);
             builder.HasOne(pessoa => pessoa.Escala);
         }
     }

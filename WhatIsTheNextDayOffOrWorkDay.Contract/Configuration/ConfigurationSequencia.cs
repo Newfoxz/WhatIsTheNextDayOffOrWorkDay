@@ -14,6 +14,7 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Configuration
             builder.HasKey(sequencia => sequencia.Id);
             builder.Property(sequencia => sequencia.Numero).IsRequired();
             builder.Property(sequencia => sequencia.Indicador).IsRequired();
+            builder.HasOne(sequencia => sequencia.Escala);
         }
     }
 }

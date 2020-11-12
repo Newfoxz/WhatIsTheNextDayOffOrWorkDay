@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhatIsTheNextDayOffOrWorkDay.Repository.Context;
 
 namespace WhatIsTheNextDayOffOrWorkDay.Repository.Migrations
 {
     [DbContext(typeof(WhatIsTheNextDayOffOrWorkDayDbContext))]
-    partial class WhatIsTheNextDayOffOrWorkDayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201111235810_db_12_WhatIsTheNextDayOffOrWorkDay")]
+    partial class db_12_WhatIsTheNextDayOffOrWorkDay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -7,6 +7,8 @@ namespace WhatIsTheNextDayOffOrWorkDay.Domain.Entity
         public int Id { get; set; }
         public int Numero { get; set; }
         public int Indicador { get; set; }
+        public int EscalaId { get; set; }
+        public virtual Escala Escala { get; set; }
 
         //public string GetIndicadorToString()
         //{
