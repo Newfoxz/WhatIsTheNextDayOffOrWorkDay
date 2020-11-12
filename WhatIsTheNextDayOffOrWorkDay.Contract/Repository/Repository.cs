@@ -1,50 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using WhatIsTheNextDayOffOrWorkDay.Domain.Contract;
+using WhatIsTheNextDayOffOrWorkDay.Repository.Context;
 
 namespace WhatIsTheNextDayOffOrWorkDay.Repository.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
+        protected readonly WhatIsTheNextDayOffOrWorkDayDbContext WhatIsTheNextDayOffOrWorkDayDbContext;
+
+        public Repository(WhatIsTheNextDayOffOrWorkDayDbContext whatIsTheNextDayOffOrWorkDayDbContext)
+        {
+            WhatIsTheNextDayOffOrWorkDayDbContext = whatIsTheNextDayOffOrWorkDayDbContext;
+        }
+
         public void Add(T entity)
         {
-            throw new NotImplementedException();
+            WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Add(entity);
+            WhatIsTheNextDayOffOrWorkDayDbContext.SaveChanges();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            WhatIsTheNextDayOffOrWorkDayDbContext.Dispose();
         }
 
         public ICollection<T> GetAll()
         {
-            throw new NotImplementedException();
+            return WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().ToList();
         }
 
-        public T GetByFilter(Predicate<T> entity)
+        public T GetByFilter(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            return WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().ToList().Find(match);
         }
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            return WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Find(id);
         }
 
-        public ICollection<T> GetManyByFilter(Predicate<T> entity)
+        public ICollection<T> GetManyByFilter(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            return WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().ToList().FindAll(match);
         }
 
         public void Remove(T entity)
         {
-            throw new NotImplementedException();
+            WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Remove(entity);
+            WhatIsTheNextDayOffOrWorkDayDbContext.SaveChanges();
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Update(entity);
+            WhatIsTheNextDayOffOrWorkDayDbContext.SaveChanges();
         }
     }
 }

@@ -8,9 +8,9 @@ namespace WhatIsTheNextDayOffOrWorkDay.Domain.Contract
     {
         void Add(T entity);
         T GetById(int id);
-        T GetByFilter(Predicate<T> entity);
+        T GetByFilter(Predicate<T> match);
         ICollection<T> GetAll();
-        ICollection<T> GetManyByFilter(Predicate<T> entity);
+        ICollection<T> GetManyByFilter(Predicate<T> match);
         void Update(T entity);
         void Remove(T entity);
     }
