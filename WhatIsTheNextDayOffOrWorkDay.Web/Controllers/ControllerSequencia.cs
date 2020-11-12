@@ -1,20 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WhatIsTheNextDayOffOrWorkDay.Domain.Contract;
+using WhatIsTheNextDayOffOrWorkDay.Domain.Entity;
 
 namespace WhatIsTheNextDayOffOrWorkDay.Web.Controllers
 {
-    [Route("api/[controller]")]
-    public class ControllerSequencia : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class ControllerSequencia : ControllerBase
     {
         private readonly IRepositorySequencia _repositorySequencia;
 
         public ControllerSequencia(IRepositorySequencia repositorySequencia)
         {
             _repositorySequencia = repositorySequencia;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_repositorySequencia.GetAll());
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Sequencia sequencia)
+        {
+            _repositorySequencia.Add(sequencia);
+            return Created("api/sequencia", sequencia);
         }
     }
 }
