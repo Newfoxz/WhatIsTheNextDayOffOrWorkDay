@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WhatIsTheNextDayOffOrWorkDay.Domain.Contract;
 using WhatIsTheNextDayOffOrWorkDay.Repository.Context;
+using WhatIsTheNextDayOffOrWorkDay.Repository.Repository;
 
 namespace WhatIsTheNextDayOffOrWorkDay.Web
 {
@@ -25,7 +27,10 @@ namespace WhatIsTheNextDayOffOrWorkDay.Web
                 options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("WhatIsTheNextDayOffOrWorkDay"), migration => 
                     migration.MigrationsAssembly("WhatIsTheNextDayOffOrWorkDay.Repository")
                 )
-            );                
+            );
+            services.AddScoped<IRepositoryEscala, RepositoryEscala>();
+            services.AddScoped<IRepositoryPessoa, RepositoryPessoa>();
+            services.AddScoped<IRepositorySequencia, RepositorySequencia>();
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
