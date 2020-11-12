@@ -15,6 +15,14 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Configuration
             builder.Property(pessoa => pessoa.Apelido).IsRequired().HasMaxLength(25);
             builder.Property(pessoa => pessoa.Email).IsRequired().HasMaxLength(75);
             builder.HasOne(pessoa => pessoa.Escala);
+
+            builder.HasData(new Pessoa
+            {
+                Id = 1,
+                Apelido = "@filiposo",
+                Email = "lord.filiposo@gmail.com",
+                EscalaId = 1,
+            });
         }
     }
 }

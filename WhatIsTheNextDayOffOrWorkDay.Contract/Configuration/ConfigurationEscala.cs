@@ -12,9 +12,16 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Configuration
         public void Configure(EntityTypeBuilder<Escala> builder)
         {
             builder.HasKey(escala => escala.Id);
-            builder.Property(escala => escala.Descricao).IsRequired().HasMaxLength(25);
+            builder.Property(escala => escala.Descricao).IsRequired().HasMaxLength(50);
             builder.Property(escala => escala.VigenciaInicial).IsRequired();
             builder.HasMany(escala => escala.Sequencias);
+
+            builder.HasData(new Escala
+            {
+                Id = 1,
+                Descricao = "@FILIPOSO CPTM-ESCALA (4-1-3-2)",
+                VigenciaInicial = new DateTime(2020, 10, 30),
+            });
         }
     }
 }
