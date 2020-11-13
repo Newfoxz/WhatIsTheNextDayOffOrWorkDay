@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "WhatIsTheNextDayOffOrWorkDay": "server=DESKTOP-UFM5SK3\\SQLEXPRESS;database=WhatIsTheNextDayOffOrWorkDay;trusted_connection=true;multipleactiveresultsets=true"
+    "WhatIsTheNextDayOffOrWorkDay": "Server=DESKTOP-UFM5SK3\\SQLEXPRESS;Database=WhatIsTheNextDayOffOrWorkDay;User Id=sa;Password=1234"
   }
 }

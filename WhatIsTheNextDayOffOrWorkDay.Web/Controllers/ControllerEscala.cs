@@ -5,7 +5,7 @@ using WhatIsTheNextDayOffOrWorkDay.Domain.Entity;
 namespace WhatIsTheNextDayOffOrWorkDay.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ControllerEscala : ControllerBase
     {
         private readonly IRepositoryEscala _repositoryEscala;

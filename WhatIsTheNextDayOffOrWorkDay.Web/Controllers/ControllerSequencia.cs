@@ -5,7 +5,7 @@ using WhatIsTheNextDayOffOrWorkDay.Domain.Entity;
 namespace WhatIsTheNextDayOffOrWorkDay.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ControllerSequencia : ControllerBase
     {
         private readonly IRepositorySequencia _repositorySequencia;

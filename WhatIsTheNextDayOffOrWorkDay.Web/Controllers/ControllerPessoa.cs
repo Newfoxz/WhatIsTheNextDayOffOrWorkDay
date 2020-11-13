@@ -5,7 +5,7 @@ using WhatIsTheNextDayOffOrWorkDay.Domain.Entity;
 namespace WhatIsTheNextDayOffOrWorkDay.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ControllerPessoa : ControllerBase
     {
         private readonly IRepositoryPessoa _repositoryPessoa;
@@ -18,8 +18,7 @@ namespace WhatIsTheNextDayOffOrWorkDay.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(new Pessoa { Id = 1, Apelido = "@fl", Email = "@mail" });
-            //return Ok(_repositoryPessoa.GetAll());
+            return Ok(_repositoryPessoa.GetAll());
         }
 
         [HttpPost]
