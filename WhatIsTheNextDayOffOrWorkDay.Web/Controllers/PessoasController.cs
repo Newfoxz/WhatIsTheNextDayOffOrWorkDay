@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using WhatIsTheNextDayOffOrWorkDay.Domain.Contract;
 using WhatIsTheNextDayOffOrWorkDay.Domain.Entity;
-using WhatIsTheNextDayOffOrWorkDay.Repository.Context;
 
 namespace WhatIsTheNextDayOffOrWorkDay.Web.Controllers
 {
@@ -14,95 +9,88 @@ namespace WhatIsTheNextDayOffOrWorkDay.Web.Controllers
     [ApiController]
     public class PessoasController : ControllerBase
     {
-        private readonly WhatIsTheNextDayOffOrWorkDayDbContext _context;
+        private readonly IRepositoryPessoa _repositoryPessoa;
 
-        public PessoasController(WhatIsTheNextDayOffOrWorkDayDbContext context)
+        public PessoasController(IRepositoryPessoa repositoryPessoa)
         {
-            _context = context;
+            _repositoryPessoa = repositoryPessoa;
         }
 
-        // GET: api/Pessoas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pessoa>>> GetPessoas()
+        public async Task<ActionResult<Pessoa>> Get()
         {
-            return await _context.Pessoas.ToListAsync();
+            return Ok(await _repositoryPessoa.GetAll());
         }
 
-        // GET: api/Pessoas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pessoa>> GetPessoa(int id)
+        public async Task<ActionResult<Pessoa>> GetById(int id)
         {
-            var pessoa = await _context.Pessoas.FindAsync(id);
+            var pessoa = await _repositoryPessoa.GetById(id);
 
-            if (pessoa == null)
-            {
-                return NotFound();
-            }
-
-            return pessoa;
+            return pessoa == null ? NotFound() : Ok(pessoa);
         }
 
-        // PUT: api/Pessoas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPessoa(int id, Pessoa pessoa)
-        {
-            if (id != pessoa.Id)
-            {
-                return BadRequest();
-            }
+        //// PUT: api/Pessoas/5
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutPessoa(int id, Pessoa pessoa)
+        //{
+        //    if (id != pessoa.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(pessoa).State = EntityState.Modified;
+        //    _context.Entry(pessoa).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PessoaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!PessoaExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        // POST: api/Pessoas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Pessoa>> PostPessoa(Pessoa pessoa)
-        {
-            _context.Pessoas.Add(pessoa);
-            await _context.SaveChangesAsync();
+        //// POST: api/Pessoas
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //public async Task<ActionResult<Pessoa>> PostPessoa(Pessoa pessoa)
+        //{
+        //    _context.Pessoas.Add(pessoa);
+        //    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPessoa", new { id = pessoa.Id }, pessoa);
-        }
+        //    return CreatedAtAction("GetPessoa", new { id = pessoa.Id }, pessoa);
+        //}
 
-        // DELETE: api/Pessoas/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePessoa(int id)
-        {
-            var pessoa = await _context.Pessoas.FindAsync(id);
-            if (pessoa == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Pessoas/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeletePessoa(int id)
+        //{
+        //    var pessoa = await _context.Pessoas.FindAsync(id);
+        //    if (pessoa == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Pessoas.Remove(pessoa);
-            await _context.SaveChangesAsync();
+        //    _context.Pessoas.Remove(pessoa);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        private bool PessoaExists(int id)
-        {
-            return _context.Pessoas.Any(e => e.Id == id);
-        }
+        //private bool PessoaExists(int id)
+        //{
+        //    return _context.Pessoas.Any(e => e.Id == id);
+        //}
     }
 }

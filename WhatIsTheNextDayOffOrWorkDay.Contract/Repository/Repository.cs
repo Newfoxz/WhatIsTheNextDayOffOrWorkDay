@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using WhatIsTheNextDayOffOrWorkDay.Domain.Contract;
 using WhatIsTheNextDayOffOrWorkDay.Repository.Context;
 
@@ -16,10 +18,22 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Repository
             WhatIsTheNextDayOffOrWorkDayDbContext = whatIsTheNextDayOffOrWorkDayDbContext;
         }
 
-        public void Add(T entity)
+        public void Create(T entity)
         {
             WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Add(entity);
-            WhatIsTheNextDayOffOrWorkDayDbContext.SaveChanges();
+            WhatIsTheNextDayOffOrWorkDayDbContext.SaveChangesAsync();
+        }
+
+        public void Update(T entity)
+        {
+            WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Update(entity);
+            WhatIsTheNextDayOffOrWorkDayDbContext.SaveChangesAsync();
+        }
+
+        public void Remove(T entity)
+        {
+            WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Remove(entity);
+            WhatIsTheNextDayOffOrWorkDayDbContext.SaveChangesAsync();
         }
 
         public void Dispose()
@@ -27,36 +41,19 @@ namespace WhatIsTheNextDayOffOrWorkDay.Repository.Repository
             WhatIsTheNextDayOffOrWorkDayDbContext.Dispose();
         }
 
-        public ICollection<T> GetAll()
+        public async Task<T> GetById(int id)
         {
-            return WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().ToList();
+            return await WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().FindAsync(id);
         }
 
-        public T GetByFilter(Predicate<T> match)
+        public async Task<ICollection<T>> GetByCondition(Expression<Func<T, bool>> expression)
         {
-            return WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().ToList().Find(match);
+            return await WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Where(expression).ToListAsync();
         }
 
-        public T GetById(int id)
+        public async Task<ICollection<T>> GetAll()
         {
-            return WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Find(id);
-        }
-
-        public ICollection<T> GetManyByFilter(Predicate<T> match)
-        {
-            return WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().ToList().FindAll(match);
-        }
-
-        public void Remove(T entity)
-        {
-            WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Remove(entity);
-            WhatIsTheNextDayOffOrWorkDayDbContext.SaveChanges();
-        }
-
-        public void Update(T entity)
-        {
-            WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().Update(entity);
-            WhatIsTheNextDayOffOrWorkDayDbContext.SaveChanges();
+            return await WhatIsTheNextDayOffOrWorkDayDbContext.Set<T>().ToListAsync();
         }
     }
 }

@@ -22,11 +22,11 @@ namespace WhatIsTheNextDayOffOrWorkDay.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(options => 
+            services.AddControllersWithViews().AddNewtonsoftJson(options => 
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
             services.AddDbContext<WhatIsTheNextDayOffOrWorkDayDbContext>(options => 
-                options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("WhatIsTheNextDayOffOrWorkDay"), migration => 
+                options.UseLazyLoadingProxies(true).UseSqlServer(Configuration.GetConnectionString("WhatIsTheNextDayOffOrWorkDay"), migration => 
                     migration.MigrationsAssembly("WhatIsTheNextDayOffOrWorkDay.Repository")
                 )
             );
