@@ -10,14 +10,14 @@ namespace WhatIsTheNextDayOffOrWorkDay.Domain.Entity
         public int EscalaId { get; set; }
         public virtual Escala Escala { get; set; }
 
-        //public string GetIndicadorToString()
-        //{
-        //    if (Indicador == 0)
-        //        return "DayOff";
-        //    else if (Indicador == 1)
-        //        return "WorkDay";
-        //    else
-        //        return null;
-        //}
+        public string IndicadorToString()
+        {
+            if (Indicador == 0)
+                return "DayOff";
+            else if (Indicador == 1)
+                return "WorkDay";
+            else
+                return string.Empty;
+        }
     }
 }
