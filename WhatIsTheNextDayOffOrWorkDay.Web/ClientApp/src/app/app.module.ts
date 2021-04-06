@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { RouteStorage } from './security/route.storage';
+import { PessoaService } from './services/pessoa/pessoa.service';
+import { EscalaService } from './services/escala/escala.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import { RouteStorage } from './security/route.storage';
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [RouteStorage] },
     ])
   ],
-  providers: [],
+  providers: [PessoaService, EscalaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

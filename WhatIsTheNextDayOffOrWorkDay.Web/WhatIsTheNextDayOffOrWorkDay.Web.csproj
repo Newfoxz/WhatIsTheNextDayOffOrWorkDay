@@ -42,6 +42,9 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\autorizacao\guarda.rota.ts" />
     <None Remove="ClientApp\src\app\autorizacao\guarda.rotas.ts" />
+    <None Remove="ClientApp\src\app\model\escala.ts" />
+    <None Remove="ClientApp\src\app\model\periodo.ts" />
+    <None Remove="ClientApp\src\app\model\pessoa.ts" />
   </ItemGroup>
 
   <ItemGroup>
