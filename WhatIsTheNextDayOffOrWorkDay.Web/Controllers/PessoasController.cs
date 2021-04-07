@@ -61,21 +61,23 @@ namespace WhatIsTheNextDayOffOrWorkDay.Web.Controllers
         }
 
         [HttpGet("periodo")]
-        public async Task<ActionResult<IDictionary<string, string>>> GetPessoaPeriodoById2(int id, int range)
+        public async Task<ActionResult<IEnumerable<Periodo>>> GetPessoaPeriodoById2(int id, int range)
         {
             var pessoa = await _repositoryPessoa.GetById(id);
 
             if (pessoa is not null)
             {
-                IDictionary<string, string> periodos = new Dictionary<string, string>();
+                IList<Periodo> periodos = new List<Periodo>();
 
                 for (int cont = 0; cont < range; cont++)
-                {
-                    periodos.Add(DateTime.Now.AddDays(cont).ToString("dd/MM/yyyy - dddd", CultureInfo.CreateSpecificCulture("pt-BR")),
-                        pessoa.Escala.Sequencias.ToList().Find(t =>
-                            t.Numero == ((DateTime.Now.AddDays(cont) - pessoa.Escala.VigenciaInicial).Days % pessoa.Escala.Sequencias.ToList().Count) + 1
-                        ).IndicadorToString()
-                    );
+                {                  
+                    periodos.Add(new Periodo
+                    {
+                        Data = DateTime.Now.AddDays(cont).ToString("dd/MM/yyyy - dddd", CultureInfo.CreateSpecificCulture("pt-BR")),
+                        Indicador = pessoa.Escala.Sequencias.ToList().Find(t => 
+                            t.Numero == ((DateTime.Now.AddDays(cont) - pessoa.Escala.VigenciaInicial).Days % pessoa.Escala.Sequencias.ToList().Count) + 1 )
+                        .IndicadorToString()
+                    });                  
                 }
 
                 return periodos == null ? BadRequest() : Ok(periodos);
@@ -85,6 +87,32 @@ namespace WhatIsTheNextDayOffOrWorkDay.Web.Controllers
                 return NotFound();
             }
         }
+
+        //[HttpGet("periodo")]
+        //public async Task<ActionResult<IDictionary<string, string>>> GetPessoaPeriodoById2(int id, int range)
+        //{
+        //    var pessoa = await _repositoryPessoa.GetById(id);
+
+        //    if (pessoa is not null)
+        //    {
+        //        IDictionary<string, string> periodos = new Dictionary<string, string>();
+
+        //        for (int cont = 0; cont < range; cont++)
+        //        {
+        //            periodos.Add(DateTime.Now.AddDays(cont).ToString("dd/MM/yyyy - dddd", CultureInfo.CreateSpecificCulture("pt-BR")),
+        //                pessoa.Escala.Sequencias.ToList().Find(t =>
+        //                    t.Numero == ((DateTime.Now.AddDays(cont) - pessoa.Escala.VigenciaInicial).Days % pessoa.Escala.Sequencias.ToList().Count) + 1
+        //                ).IndicadorToString()
+        //            );
+        //        }
+
+        //        return periodos == null ? BadRequest() : Ok(periodos);
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
         [HttpGet("periodo/2")]
         public async Task<ActionResult<IDictionary<string, string>>> GetPessoaPeriodoByApelido(string apelido, int range)

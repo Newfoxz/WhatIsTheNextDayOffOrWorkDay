@@ -10,8 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { RouteStorage } from './security/route.storage';
-import { PessoaService } from './services/pessoa/pessoa.service';
-import { EscalaService } from './services/escala/escala.service';
+//import { PessoaService } from './services/pessoa/pessoa.service';
+//import { EscalaService } from './services/escala/escala.service';
 
 @NgModule({
   declarations: [
@@ -27,11 +27,12 @@ import { EscalaService } from './services/escala/escala.service';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [RouteStorage] },
+      { path: 'counter', component: CounterComponent, canActivate: [RouteStorage] },
+      { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
-  providers: [PessoaService, EscalaService],
+  providers: [],
+  //providers: [PessoaService, EscalaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

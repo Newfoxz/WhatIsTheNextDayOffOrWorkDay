@@ -13,7 +13,7 @@ export class RouteStorage implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-      this.router.navigate(['/counter']);
-      return false;
+      this.router.navigate(['/']);
+      return true;
     }
 }
