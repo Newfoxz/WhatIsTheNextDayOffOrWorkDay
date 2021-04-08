@@ -1,15 +1,23 @@
-<h1>Welcome {{ pessoa.apelido }} </h1>
-<p>For more information, contact: <strong>{{ pessoa.email}}</strong></p>
+<h1>Welcome 
+  <span>{{ pessoa.apelido }}</span>
+</h1>
+<p>For more information, contact:
+  <span>
+    <strong>{{ pessoa.email}}</strong>
+  </span>
+</p>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="periodos">
   <thead>
     <tr>
+      <th>#</th>
       <th>Date</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let periodo of periodos">
+    <tr *ngFor="let periodo of periodos; index as count">
+      <th scope="row"> {{ count + 1 }} </th>
       <td>{{ periodo.data }}</td>
       <td>{{ periodo.indicador }}</td>
     </tr>
